@@ -29,26 +29,6 @@ namespace Server.Controllers
         {
             payments.Add(payment);
             return Ok();
-        }
-        //[HttpGet("{id}")]
-        //public Proposal GetProposal([FromRoute] int id)
-        //{
-        //    Proposal proposal = proposals.FirstOrDefault(x => x.id == id.ToString());
-        //    return proposal;
-        //}
-        //[HttpPost]
-        //public void PostProposal([FromBody] Proposal proposal)
-        //{
-        //    List<Proposal> proposals = new List<Proposal>();
-        //    proposals.Add(proposal);
-        //}
-        //[HttpDelete("{id}")]
-        //public IEnumerable<Proposal> DeleteProposal([FromRoute] int id)
-        //{
-        //    Proposal proposal = proposals.FirstOrDefault(x => x.id == id.ToString());
-        //    proposals.Remove(proposal);
-        //    return proposals;
-
-        //}
+        }        
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Server.Models
+﻿namespace Server.Models
 {
     public class Payment
     {
@@ -11,5 +6,6 @@ namespace Server.Models
         public string name { get; set; }
         public string amount { get; set; }
         public string proposalId { get; set; }
+        public string budgetId { get; set; }
     }
 }

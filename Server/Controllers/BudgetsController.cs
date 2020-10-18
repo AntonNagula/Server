@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
 
@@ -19,9 +17,15 @@ namespace Server.Controllers
             budgets.Add(new Budget { id = "2", name = "pokju", amount = "olkiuj", remainingAmount="kjhjg" });
         }
         [HttpGet]
-        public async Task<IActionResult> GetPayments()
+        public async Task<IActionResult> GetBudgets()
         {            
             return Ok(budgets);
+        }
+        [HttpPost("AddCollection")]
+        public async Task<IActionResult> PostBudgets([FromBody] IEnumerable<Budget> postBudgets)
+        {
+            budgets.AddRange(postBudgets);
+            return Ok();
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPayments([FromRoute] int id)
