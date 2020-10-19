@@ -56,7 +56,10 @@ namespace Server
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            app.UseDefaultFiles(); // <-- Это
+            app.UseStaticFiles(); // <-- Вот это
+
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseSwagger();
 
