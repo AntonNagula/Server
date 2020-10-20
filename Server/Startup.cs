@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace Server
@@ -56,8 +50,8 @@ namespace Server
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseDefaultFiles(); // <-- Это
-            app.UseStaticFiles(); // <-- Вот это
+            app.UseDefaultFiles(); 
+            app.UseStaticFiles(); 
 
             app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 

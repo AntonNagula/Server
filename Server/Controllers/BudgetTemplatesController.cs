@@ -23,10 +23,27 @@ namespace Server.Controllers
         {
             return Ok(budgetTemplates);
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBudgetTemplate([FromRoute]int id)
+        {
+            BudgetTemplate bt = budgetTemplates.FirstOrDefault(x => x.id == id.ToString());
+            return Ok(bt);
+        }
         [HttpPost]
         public async Task<IActionResult> PostBT([FromBody] BudgetTemplate budgetTemplate)
         {
             budgetTemplates.Add(budgetTemplate);
+            return Ok();
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutBT([FromBody] BudgetTemplate budgetTemplate)
+        {
+            budgetTemplates.Add(budgetTemplate);
+            return Ok();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBT([FromRoute] int id)
+        {            
             return Ok();
         }
     }
