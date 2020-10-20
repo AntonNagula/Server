@@ -23,6 +23,11 @@ namespace Server.Controllers
         {
             return Ok(budgetTemplates);
         }
-        
+        [HttpPost]
+        public async Task<IActionResult> PostBT([FromBody] BudgetTemplate budgetTemplate)
+        {
+            budgetTemplates.Add(budgetTemplate);
+            return Ok();
+        }
     }
 }
