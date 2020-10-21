@@ -16,8 +16,8 @@ namespace Server.Controllers
         List<Proposal> proposals = new List<Proposal>();
         public ProposalController()
         {
-            proposals.Add(new Proposal { ProposalId=1, Name = "jjjj", Status = 1, UserName="vtv", BankAccount="kkkk", Amount=4000 });
-            proposals.Add(new Proposal { ProposalId = 1, Name = "jjjj", Status = 1, UserName = "vtv", BankAccount = "kkkk", Amount = 4000 });
+            proposals.Add(new Proposal { ProposalId=1, Name = "jjjj", StatusId = 1, UserName="vtv", BankAccount="kkkk", Amount=4000 });
+            proposals.Add(new Proposal { ProposalId = 1, Name = "jjjj", StatusId = 1, UserName = "vtv", BankAccount = "kkkk", Amount = 4000 });
         }
         [HttpGet]
         public IEnumerable<Proposal> GetProposals()
