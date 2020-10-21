@@ -15,13 +15,13 @@ namespace Server.Controllers
         List<Payment> payments = new List<Payment>();
         public PaymentController()
         {
-            payments.Add(new Payment { id = "1", name = "jjjj", amount = "jknk", proposalId="1" });
-            payments.Add(new Payment { id = "2", name = "pokju", amount="olkiuj", proposalId="2" });
+            payments.Add(new Payment { PaymentId = 1, Name = "jjjj", Amount = 2000, ProposalId = 1 });
+            payments.Add(new Payment { PaymentId = 2, Name = "jjjj", Amount = 2000, ProposalId = 2 });
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPayments([FromRoute] int id)
         {
-            IEnumerable<Payment> payments2 = payments.Where(x => x.proposalId == id.ToString()).ToList();
+            IEnumerable<Payment> payments2 = payments.Where(x => x.ProposalId == id).ToList();
             return Ok(payments2);
         }
         [HttpPost]
@@ -29,6 +29,6 @@ namespace Server.Controllers
         {
             payments.Add(payment);
             return Ok();
-        }        
+        }
     }
 }

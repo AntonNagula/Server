@@ -2,8 +2,8 @@
 {
     public class BudgetTemplate
     {
-        public string id { get; set; }
-        public string name { get; set; }
-        public string amount { get; set; }
+        public int BudgetTemplateId { get; set; }
+        public string Name { get; set; }
+        public int Amount { get; set; }
     }
 }

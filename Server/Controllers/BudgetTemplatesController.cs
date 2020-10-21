@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
 
@@ -15,8 +13,7 @@ namespace Server.Controllers
         List<BudgetTemplate> budgetTemplates = new List<BudgetTemplate>();
         public BudgetTemplatesController()
         {
-            budgetTemplates.Add(new BudgetTemplate { id = "1", name = "jjjj", amount = "jknk" });
-            budgetTemplates.Add(new BudgetTemplate { id = "2", name = "pokju", amount = "olkiuj" });
+            budgetTemplates.Add(new BudgetTemplate { BudgetTemplateId = 1, Name = "jjjj", Amount = 2000 });
         }
         [HttpGet]
         public async Task<IActionResult> GetBudgetTemplates()
@@ -26,7 +23,7 @@ namespace Server.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBudgetTemplate([FromRoute]int id)
         {
-            BudgetTemplate bt = budgetTemplates.FirstOrDefault(x => x.id == id.ToString());
+            BudgetTemplate bt = budgetTemplates.FirstOrDefault(x => x.BudgetTemplateId == id);
             return Ok(bt);
         }
         [HttpPost]

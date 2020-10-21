@@ -2,10 +2,10 @@
 {
     public class Budget
     {
-        public string id { get; set; }
-        public string name { get; set; }
-        public string amount { get; set; }
-        public string remainingAmount { get; set; }
-        public string budgetTemplateId { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public double Amount { get; set; }
+        public double RemainingAmount { get; set; }
+        public int BudgetTemplateId { get; set; }
     }
 }

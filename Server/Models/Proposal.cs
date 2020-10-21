@@ -2,14 +2,14 @@
 {
     public class Proposal
     {
-        public string id { get; set; }
-        public string name { get; set; }
-        public string userName { get; set; }
-        public string userSurname { get; set; }
-        public string purpose { get; set; }
-        public string amount { get; set; }
-        public string bankAccount { get; set; }
-        public string status { get; set; }  
+        public int ProposalId { get; set; }
+        public string Name { get; set; }
+        public string UserName { get; set; }
+        public string UserSurname { get; set; }
+        public string Purpose { get; set; }
+        public double Amount { get; set; }
+        public string BankAccount { get; set; }
+        public int Status { get; set; }  
     }
     public enum Statuses:int
     {

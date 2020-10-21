@@ -13,8 +13,7 @@ namespace Server.Controllers
         List<Budget> budgets = new List<Budget>();
         public BudgetsController()
         {
-            budgets.Add(new Budget { id = "1", name = "jjjj", amount = "jknk", remainingAmount="jhg" });
-            budgets.Add(new Budget { id = "2", name = "pokju", amount = "olkiuj", remainingAmount="kjhjg" });
+            budgets.Add(new Budget { Id = 1, Name = "jjjj", Amount = 1000, RemainingAmount=1000 });
         }
         [HttpGet]
         public async Task<IActionResult> GetBudgets()
@@ -30,7 +29,7 @@ namespace Server.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPayments([FromRoute] int id)
         {
-            IEnumerable<Budget> budgtes2 = budgets.Where(x => x.id == id.ToString()).ToList();
+            IEnumerable<Budget> budgtes2 = budgets.Where(x => x.Id == id).ToList();
             return Ok(budgtes2);
         }
     }
