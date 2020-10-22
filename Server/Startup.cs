@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Server.Services;
 
 namespace Server
 {
@@ -21,18 +22,14 @@ namespace Server
         {
             services.AddCors();
 
+            services.AddJWTAuthService(Configuration);
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
-
-            //services.AddTransient<IService, Service>();
-
-            //services.AddTransient<IUnitOfWork, UnitOfWork>();
-
-            
 
             //services.AddDbContext<ProjectDbContext>(options =>
             //   options.UseSqlServer(
@@ -50,8 +47,8 @@ namespace Server
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseDefaultFiles(); 
-            app.UseStaticFiles(); 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
@@ -65,6 +62,7 @@ namespace Server
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
