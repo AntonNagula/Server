@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,14 +33,17 @@ namespace Server
 
             //services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-            
+
 
             //services.AddDbContext<ProjectDbContext>(options =>
             //   options.UseSqlServer(
             //       Configuration.GetConnectionString("DefaultConnection")
             //       )
             //   );
-
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "Angular/dist";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +58,16 @@ namespace Server
             app.UseStaticFiles(); 
 
             app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "Angular";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
+            });
 
             app.UseSwagger();
 

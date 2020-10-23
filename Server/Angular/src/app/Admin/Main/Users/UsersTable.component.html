@@ -1,0 +1,16 @@
+<body>
+  <table>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.id}}</td>
+        <td>{{user.role}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.surname}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.password}}</td>
+        <td><button class="btn btn-primary button-margin" (click)="Edit(user.userId)">Редактировать</button></td>
+        <td><button class="btn btn-primary button-margin" (click)="Delete(user.userId)">Удалить</button></td>
+      </tr>
+    </tbody>
+  </table>
+</body>

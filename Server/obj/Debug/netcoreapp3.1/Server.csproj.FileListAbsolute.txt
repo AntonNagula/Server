@@ -60,6 +60,15 @@ G:\универ\4 курс\Курсач\Server\Server\bin\Debug\netcoreapp3.1\ru
 G:\универ\4 курс\Курсач\Server\Server\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 G:\универ\4 курс\Курсач\Server\Server\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 G:\универ\4 курс\Курсач\Server\Server\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+G:\универ\4 курс\Курсач\Server\Server\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.NodeServices.dll
+G:\универ\4 курс\Курсач\Server\Server\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.SpaServices.dll
+G:\универ\4 курс\Курсач\Server\Server\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.SpaServices.Extensions.dll
+G:\универ\4 курс\Курсач\Server\Server\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+G:\универ\4 курс\Курсач\Server\Server\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
+G:\универ\4 курс\Курсач\Server\Server\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
+G:\универ\4 курс\Курсач\Server\Server\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Configuration.dll
+G:\универ\4 курс\Курсач\Server\Server\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Console.dll
+G:\универ\4 курс\Курсач\Server\Server\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.ConfigurationExtensions.dll
 G:\универ\4 курс\Курсач\Server\Server\obj\Debug\netcoreapp3.1\Server.csproj.CoreCompileInputs.cache
 G:\универ\4 курс\Курсач\Server\Server\obj\Debug\netcoreapp3.1\Server.MvcApplicationPartsAssemblyInfo.cs
 G:\универ\4 курс\Курсач\Server\Server\obj\Debug\netcoreapp3.1\Server.MvcApplicationPartsAssemblyInfo.cache
