@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
 
 namespace Server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProposalController : ControllerBase
@@ -16,8 +14,8 @@ namespace Server.Controllers
         List<Proposal> proposals = new List<Proposal>();
         public ProposalController()
         {
-            proposals.Add(new Proposal { ProposalId=1, Name = "jjjj", Status = 1, UserName="vtv", BankAccount="kkkk", Amount=4000 });
-            proposals.Add(new Proposal { ProposalId = 1, Name = "jjjj", Status = 1, UserName = "vtv", BankAccount = "kkkk", Amount = 4000 });
+            proposals.Add(new Proposal { ProposalId=1, Name = "jjjj", StatusId = 1, UserName="vtv", BankAccount="kkkk", Amount=4000 });
+            proposals.Add(new Proposal { ProposalId = 1, Name = "jjjj", StatusId = 1, UserName = "vtv", BankAccount = "kkkk", Amount = 4000 });
         }
         [HttpGet]
         public IEnumerable<Proposal> GetProposals()

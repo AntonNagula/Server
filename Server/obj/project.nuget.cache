@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "a67r1x2q50qbrPPkw2Z/IOe2qrjSvfh12i0K5Q7lwUEI3P9xCBs+jg+UJsMNYq/gHscBgVWUyqF+gsef5DRYFQ==",
+  "dgSpecHash": "hBIs6QW48k2/aSVEjgeH1yWEjSKhfQKkXEsxxI9mRkvJB1q1/X4psGw8z7jIRzn3awjDv8QAtDGn5eSi/lvbBQ==",
   "success": true,
   "projectFilePath": "G:\\универ\\4 курс\\Курсач\\Server\\Server\\Server.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Banderos\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.9\\microsoft.aspnetcore.authentication.jwtbearer.3.1.9.nupkg.sha512",
     "C:\\Users\\Banderos\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Banderos\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\Banderos\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
