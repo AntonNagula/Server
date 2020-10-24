@@ -1,27 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+using Server.Managers;
 using Server.Models;
 
 namespace Server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
         List<User> users = new List<User>();
         List<Role> roles = new List<Role>();
-        public UserController()
+        private JWTManager _jwtManager;
+        public UserController(JWTManager jwtManager)
         {
-            users.Add(new User { UserId = 1, Name = "jjjj", RoleId=1 });
-            roles.Add(new Role { RoleId = 1, Name="plokij" });
+            _jwtManager = jwtManager;
+            users.Add(new User { UserId = 1, Name = "jjjj", RoleId = 1 });
+            roles.Add(new Role { RoleId = 1, Name = "plokij" });
         }
         [HttpGet]
         public async Task<IActionResult> GetUsers()
@@ -57,18 +56,10 @@ namespace Server.Controllers
             return Ok();
         }
         [HttpGet("/token")]
-        public async Task<IActionResult> Token()
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] AuthData authData)
         {
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
-            var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-            var tokeOptions = new JwtSecurityToken(
-                issuer: "http://localhost:54717",
-                audience: "http://localhost:54717",
-                claims: new List<Claim>(),
-                expires: DateTime.Now.AddMinutes(1),
-                signingCredentials: signinCredentials
-            );
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+            var tokenString = _jwtManager.GenerateToken("d","d");
             return Ok(new { Token = tokenString });
         }
     }

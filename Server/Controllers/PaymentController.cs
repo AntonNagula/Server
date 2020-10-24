@@ -8,6 +8,7 @@ using Server.Models;
 
 namespace Server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PaymentController : ControllerBase

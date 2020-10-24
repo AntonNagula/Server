@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Server.Managers;
 using Server.Services;
 
 namespace Server
@@ -31,6 +32,7 @@ namespace Server
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
 
+            services.AddSingleton<JWTManager>();
             //services.AddDbContext<ProjectDbContext>(options =>
             //   options.UseSqlServer(
             //       Configuration.GetConnectionString("DefaultConnection")
