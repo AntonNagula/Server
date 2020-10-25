@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.DatabaseInfrastructure;
 using Server.Managers;
 using Server.Models;
 
@@ -16,11 +17,19 @@ namespace Server.Controllers
         List<User> users = new List<User>();
         List<Role> roles = new List<Role>();
         private JWTManager _jwtManager;
-        public UserController(JWTManager jwtManager)
+        private ProjectDbContext _projectDbContext;
+        public UserController(JWTManager jwtManager, ProjectDbContext projectDbContext)
         {
             _jwtManager = jwtManager;
+            _projectDbContext = projectDbContext;
             users.Add(new User { UserId = 1, Name = "jjjj", RoleId = 1 });
             roles.Add(new Role { RoleId = 1, Name = "plokij" });
+        }
+        [HttpGet("/statuses")]
+        public async Task<IActionResult> GetStatuses()
+        {
+            List<Status> statuses = _projectDbContext.Statuses.ToList();
+            return Ok(statuses);
         }
         [HttpGet]
         public async Task<IActionResult> GetUsers()

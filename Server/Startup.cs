@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Server.DatabaseInfrastructure;
 using Server.Managers;
 using Server.Services;
 
@@ -33,11 +35,12 @@ namespace Server
             });
 
             services.AddSingleton<JWTManager>();
-            //services.AddDbContext<ProjectDbContext>(options =>
-            //   options.UseSqlServer(
-            //       Configuration.GetConnectionString("DefaultConnection")
-            //       )
-            //   );
+
+            services.AddDbContext<ProjectDbContext>(options =>
+               options.UseSqlServer(
+                   Configuration.GetConnectionString("DefaultConnection")
+                   )
+               );
 
         }
 

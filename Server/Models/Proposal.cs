@@ -1,5 +1,8 @@
-﻿namespace Server.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Server.Models
 {
+    [Table("Proposal")]
     public class Proposal
     {
         public int ProposalId { get; set; }

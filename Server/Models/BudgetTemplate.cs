@@ -1,5 +1,8 @@
-﻿namespace Server.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Server.Models
 {
+    [Table("BudgetTemplate")]
     public class BudgetTemplate
     {
         public int BudgetTemplateId { get; set; }

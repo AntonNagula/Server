@@ -12,6 +12,13 @@ CREATE TABLE [Status]
 );
 GO 
 
+INSERT INTO [Status] ([Name]) 
+VALUES
+('Draft'),
+('Sent'),
+('Approved')
+GO
+
 CREATE TABLE [Role]
 (
   [RoleId] [int] IDENTITY (1, 1),
@@ -20,11 +27,18 @@ CREATE TABLE [Role]
 );
 GO 
 
+INSERT INTO [Role] ([Name]) 
+VALUES
+('Admin'),
+('Client'),
+('Submitter')
+GO
+
 CREATE TABLE BudgetTemplate
 (
   [BudgetTemplateId]  [int] IDENTITY (1, 1),
   [Name] varchar(30) NOT NULL,
-  [Amount] [int] NULL,
+  [Amount] [float] NULL,
   CONSTRAINT PK_BudgetTemplate_Id PRIMARY KEY ([BudgetTemplateId]),
 );
 GO 
@@ -33,8 +47,8 @@ CREATE TABLE Budget
 (
   [BudgetId] [int] IDENTITY (1, 1),
   [Name] varchar(30) NOT NULL,
-  [Amount] [int] NULL,
-  [RemainingAmount] [int] NULL,
+  [Amount] [float] NULL,
+  [RemainingAmount] [float] NULL,
   [BudgetTemplateId] [int] NULL,
   CONSTRAINT PK_Budget_Id PRIMARY KEY ([BudgetId]),
   CONSTRAINT FK_Budget_To_BudgetTemplate FOREIGN KEY([BudgetTemplateId]) REFERENCES BudgetTemplate ([BudgetTemplateId])
@@ -66,5 +80,18 @@ CREATE TABLE [Proposal]
   CONSTRAINT PK_Proposal_Id PRIMARY KEY ([ProposalId]),
   CONSTRAINT FK_Proposal_To_Status FOREIGN KEY([StatusId]) REFERENCES [Status] ([StatusId]),
   CONSTRAINT FK_Proposal_To_User FOREIGN KEY([UserId]) REFERENCES [User] ([UserId])
+);
+GO 
+
+CREATE TABLE Payment
+(
+  [PaymentId] [int] IDENTITY (1, 1),
+  [Name] varchar(30) NULL,
+  [Amount] [float] NULL,
+  [ProposalId] [int] NULL,
+  [BudgetId] [int] NULL,
+  CONSTRAINT PK_Payment_Id PRIMARY KEY ([PaymentId]),
+  CONSTRAINT FK_Payment_To_Proposal FOREIGN KEY([ProposalId]) REFERENCES Proposal ([ProposalId]),
+  CONSTRAINT FK_Payment_To_Budget FOREIGN KEY([BudgetId]) REFERENCES Budget ([BudgetId])
 );
 GO 

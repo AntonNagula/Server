@@ -1,5 +1,8 @@
-﻿namespace Server.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Server.Models
 {
+    [Table("Payment")]
     public class Payment
     {
         public int PaymentId { get; set; }

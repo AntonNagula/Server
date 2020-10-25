@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Server.Models
 {
+    [Table("Status")]
     public class Status
     {
         public int StatusId { get; set; }
