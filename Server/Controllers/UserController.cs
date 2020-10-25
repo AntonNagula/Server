@@ -55,7 +55,7 @@ namespace Server.Controllers
         {
             return Ok();
         }
-        [HttpGet("/token")]
+        [HttpPost("/token")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] AuthData authData)
         {

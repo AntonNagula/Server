@@ -4,8 +4,6 @@
     {
         public int ProposalId { get; set; }
         public string Name { get; set; }
-        public string UserName { get; set; }
-        public string UserSurname { get; set; }
         public string Purpose { get; set; }
         public double? Amount { get; set; }
         public string BankAccount { get; set; }
