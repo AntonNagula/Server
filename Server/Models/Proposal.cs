@@ -7,7 +7,7 @@ namespace Server.Models
     [Table("Proposal")]
     public class Proposal : TEntity
     {
-        [JsonPropertyName("ProposalId")]
+        [JsonPropertyName("proposalId")]
         [Column("ProposalId")]
         public int Id { get; set; }
         public string Name { get; set; }
@@ -18,6 +18,16 @@ namespace Server.Models
         public Status Status { get; set; }
         public int? UserId { get; set; }
         public User User { get; set; }
+
+        public void Update(Proposal proposal)
+        {
+            Name = proposal.Name;
+            Purpose = proposal.Purpose;
+            Amount = proposal.Amount;
+            BankAccount = proposal.BankAccount;
+            StatusId = proposal.StatusId;
+            UserId = proposal.UserId;
+        }
     }
     public enum Statuses:int
     {        

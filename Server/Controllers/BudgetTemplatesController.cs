@@ -3,46 +3,49 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.BusinessAbstraction;
 using Server.Models;
 
 namespace Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BudgetTemplatesController : ControllerBase
     {
-        List<BudgetTemplate> budgetTemplates = new List<BudgetTemplate>();
-        public BudgetTemplatesController()
+        private IBudgetTemplateService _budgetTemplateService;
+        public BudgetTemplatesController(IBudgetTemplateService budgetTemplateService)
         {
-            budgetTemplates.Add(new BudgetTemplate { Id = 1, Name = "jjjj", Amount = 2000 });
+            _budgetTemplateService = budgetTemplateService;
         }
         [HttpGet]
         public async Task<IActionResult> GetBudgetTemplates()
         {
+            IEnumerable<BudgetTemplate> budgetTemplates = await _budgetTemplateService.GetAllAsync();
             return Ok(budgetTemplates);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBudgetTemplate([FromRoute]int id)
         {
-            BudgetTemplate bt = budgetTemplates.FirstOrDefault(x => x.Id == id);
+            BudgetTemplate bt = await _budgetTemplateService.GetAsync(id);
             return Ok(bt);
         }
         [HttpPost]
         public async Task<IActionResult> PostBT([FromBody] BudgetTemplate budgetTemplate)
         {
-            budgetTemplates.Add(budgetTemplate);
+            await _budgetTemplateService.CreateAsync(budgetTemplate);
             return Ok();
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBT([FromBody] BudgetTemplate budgetTemplate)
         {
-            budgetTemplates.Add(budgetTemplate);
+            await _budgetTemplateService.UpdateAsync(budgetTemplate);
             return Ok();
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBT([FromRoute] int id)
-        {            
+        {
+            await _budgetTemplateService.DeleteAsync(id);
             return Ok();
         }
     }

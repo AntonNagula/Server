@@ -6,7 +6,7 @@ namespace Server.Models
     [Table("Budget")]
     public class Budget : TEntity
     {
-        [JsonPropertyName("Id")]
+        [JsonPropertyName("id")]
         [Column("BudgetId")]
         public int Id { get; set; }
         public string Name { get; set; }
@@ -14,5 +14,12 @@ namespace Server.Models
         public double? RemainingAmount { get; set; }
         public int? BudgetTemplateId { get; set; }
         public BudgetTemplate BudgetTemplate { get; set; }
+        public void Update(Budget budget)
+        {
+            Name = budget.Name;
+            Amount = budget.Amount;
+            RemainingAmount = budget.RemainingAmount;
+            BudgetTemplateId = budget.BudgetTemplateId;
+        }
     }
 }

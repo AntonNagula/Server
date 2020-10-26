@@ -6,7 +6,7 @@ namespace Server.Models
     [Table("User")]
     public class User : TEntity
     {
-        [JsonPropertyName("UserId")]
+        [JsonPropertyName("userId")]
         [Column("UserId")]
         public int Id { get; set; }
         public string Name { get; set; }

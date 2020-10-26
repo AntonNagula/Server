@@ -1,46 +1,45 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.BusinessAbstraction;
 using Server.Models;
 
 namespace Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProposalController : ControllerBase
     {
-        List<Proposal> proposals = new List<Proposal>();
-        public ProposalController()
+        private IProposalService _proposalService;
+        public ProposalController(IProposalService proposalService)
         {
-            proposals.Add(new Proposal { Id=1, Name = "jjjj", StatusId = 1, BankAccount="kkkk", Amount=4000 });
-            proposals.Add(new Proposal { Id = 1, Name = "jjjj", StatusId = 1, BankAccount = "kkkk", Amount = 4000 });
+            _proposalService = proposalService;
         }
         [HttpGet]
-        public IEnumerable<Proposal> GetProposals()
+        public async Task<IActionResult> GetProposals()
         {
-            return proposals;
+            IEnumerable<Proposal> proposals = await _proposalService.GetAllAsync();
+            return Ok(proposals);
         }
         [HttpGet("{id}")]
-        public Proposal GetProposal([FromRoute] int id)
+        public async Task<IActionResult> GetProposal([FromRoute] int id)
         {
-            Proposal proposal = proposals.FirstOrDefault(x => x.Id == id);
-            return proposal;
+            Proposal proposal = await _proposalService.GetAsync(id);
+            return Ok(proposal);
         }
         [HttpPost]
-        public void PostProposal([FromBody] Proposal proposal)
+        public async Task<IActionResult> PostProposal([FromBody] Proposal proposal)
         {
-            List<Proposal> proposals = new List<Proposal>();
-            proposals.Add(proposal);
+            await _proposalService.CreateAsync(proposal);
+            return Ok();
         }
         [HttpDelete("{id}")]
-        public IEnumerable<Proposal> DeleteProposal([FromRoute]int id)
-        {            
-            Proposal proposal = proposals.FirstOrDefault(x => x.Id==id);
-            proposals.Remove(proposal);
-            return proposals;
-
+        public async Task<IActionResult> DeleteProposal([FromRoute]int id)
+        {
+            await _proposalService.DeleteAsync(id);
+            return Ok();
         }
     }
 }

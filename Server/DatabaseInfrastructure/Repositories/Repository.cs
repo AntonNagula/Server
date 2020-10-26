@@ -15,6 +15,12 @@ namespace Server.DatabaseInfrastructure.Repositories
         {
             _database = projectDbContext;
         }
+
+        public async Task CreateRangeAsync(IEnumerable<T> items)
+        {
+            await _database.Set<T>().AddRangeAsync(items);
+            await _database.SaveChangesAsync();
+        }
         public async virtual Task CreateAsync(T item)
         {
             await _database.Set<T>().AddAsync(item);

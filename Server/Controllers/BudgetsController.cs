@@ -3,36 +3,38 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.BusinessAbstraction;
 using Server.Models;
 
 namespace Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BudgetsController : ControllerBase
     {
-        List<Budget> budgets = new List<Budget>();
-        public BudgetsController()
+        private IBudgetService _budgetService;
+        public BudgetsController(IBudgetService budgetService)
         {
-            budgets.Add(new Budget { Id = 1, Name = "jjjj", Amount = 1000, RemainingAmount=1000 });
+            _budgetService = budgetService;
         }
         [HttpGet]
         public async Task<IActionResult> GetBudgets()
-        {            
+        {
+            IEnumerable<Budget> budgets = await _budgetService.GetAllAsync();
             return Ok(budgets);
         }
         [HttpPost("AddCollection")]
-        public async Task<IActionResult> PostBudgets([FromBody] IEnumerable<Budget> postBudgets)
+        public async Task<IActionResult> PostBudgets()
         {
-            budgets.AddRange(postBudgets);
+            await _budgetService.CreateRangeAsync();
             return Ok();
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPayments([FromRoute] int id)
         {
-            IEnumerable<Budget> budgtes2 = budgets.Where(x => x.Id == id).ToList();
-            return Ok(budgtes2);
+            IEnumerable<Budget> budgets = await _budgetService.GetAllAsync();
+            return Ok(budgets);
         }
     }
 }

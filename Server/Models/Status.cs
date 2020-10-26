@@ -6,7 +6,7 @@ namespace Server.Models
     [Table("Status")]
     public class Status : TEntity
     {
-        [JsonPropertyName("StatusId")]
+        [JsonPropertyName("statusId")]
         [Column("StatusId")]
         public int Id { get; set; }
         public string Name { get; set; }
