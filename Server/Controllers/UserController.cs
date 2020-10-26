@@ -3,13 +3,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.DatabaseAbstraction;
 using Server.DatabaseInfrastructure;
 using Server.Managers;
 using Server.Models;
 
 namespace Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -17,23 +18,19 @@ namespace Server.Controllers
         List<User> users = new List<User>();
         List<Role> roles = new List<Role>();
         private JWTManager _jwtManager;
-        private ProjectDbContext _projectDbContext;
-        public UserController(JWTManager jwtManager, ProjectDbContext projectDbContext)
+        private IUnitOfWork _database;
+        public UserController(JWTManager jwtManager, IUnitOfWork database)
         {
             _jwtManager = jwtManager;
-            _projectDbContext = projectDbContext;
-            users.Add(new User { UserId = 1, Name = "jjjj", RoleId = 1 });
-            roles.Add(new Role { RoleId = 1, Name = "plokij" });
+            _database = database;
+            users.Add(new User { Id = 1, Name = "jjjj", RoleId = 1 });
+            roles.Add(new Role { Id = 1, Name = "plokij" });
         }
-        [HttpGet("/statuses")]
-        public async Task<IActionResult> GetStatuses()
-        {
-            List<Status> statuses = _projectDbContext.Statuses.ToList();
-            return Ok(statuses);
-        }
+        
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
+            IEnumerable<User> users = await _database.Users.GetAllAsync();
             return Ok(users);
         }
         [HttpGet("/api/Roles")]
@@ -44,13 +41,13 @@ namespace Server.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser([FromRoute] int id)
         {
-            User user = users.FirstOrDefault(x => x.UserId == id);
+            User user = users.FirstOrDefault(x => x.Id == id);
             return Ok(user);
         }
         [HttpPost]
         public async Task<IActionResult> PostUser([FromBody] User user)
         {
-            users.Add(user);
+            await _database.Users.CreateAsync(user);
             return Ok();
         }
         [HttpPut("{id}")]

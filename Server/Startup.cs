@@ -5,8 +5,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Server.DatabaseAbstraction;
+using Server.DatabaseAbstraction.Repositories;
 using Server.DatabaseInfrastructure;
+using Server.DatabaseInfrastructure.Repositories;
 using Server.Managers;
+using Server.Models;
 using Server.Services;
 
 namespace Server
@@ -42,6 +46,13 @@ namespace Server
                    )
                );
 
+            services.AddTransient<IGenericRepository<Proposal>,Repository<Proposal>>();
+            services.AddTransient<IGenericRepository<Payment>, Repository<Payment>>();
+            services.AddTransient<IGenericRepository<Budget>, Repository<Budget>>();
+            services.AddTransient<IGenericRepository<BudgetTemplate>, Repository<BudgetTemplate>>();
+            services.AddTransient<IGenericRepository<User>, Repository<User>>();
+
+            services.AddTransient<IUnitOfWork,UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

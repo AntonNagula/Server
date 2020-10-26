@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Server.DatabaseAbstraction.Repositories
 {
-    public interface IRepository
+    public interface IRepository : IDisposable
     {
     }
 }

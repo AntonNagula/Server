@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Server.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Server.DatabaseAbstraction.Repositories
 {
     public interface IReadRepository<T> : IRepository
-        where T : class
+        where T : TEntity
     {
-        Task<IEnumerable<T>> GetAll();
-        Task<T> Get(int id);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<T> GetAsync(int id);
     }
 }

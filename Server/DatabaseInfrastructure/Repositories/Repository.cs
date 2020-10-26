@@ -1,42 +1,54 @@
-﻿using Server.DatabaseAbstraction.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Server.DatabaseAbstraction.Repositories;
+using Server.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Server.DatabaseInfrastructure.Repositories
 {
-    public class Repository<T> : IGenericRepository<T> where T : class
+    public class Repository<T> : IGenericRepository<T> where T : class, TEntity
     {
-        private ProjectDbContext _database;
+        protected ProjectDbContext _database;
         public Repository(ProjectDbContext projectDbContext)
         {
             _database = projectDbContext;
         }
-        public async Task Create(T item)
+        public async virtual Task CreateAsync(T item)
         {
             await _database.Set<T>().AddAsync(item);
             await _database.SaveChangesAsync();
         }
 
-        public virtual Task<bool> Delete(int id)
+        public async virtual Task<bool> DeleteAsync(int id)
         {
-            throw new System.NotImplementedException();
+            T deleteObj = _database.Set<T>().FirstOrDefault(x => x.Id == id);
+            if (deleteObj == null)
+                return false;
+            _database.Set<T>().Remove(deleteObj);
+            await _database.SaveChangesAsync();
+            return true;
         }
 
-        public virtual Task<T> Get(int id)
+        public async virtual Task<T> GetAsync(int id)
         {
-            throw new System.NotImplementedException();
+            return await _database.Set<T>().FirstOrDefaultAsync(x => x.Id == id); 
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async virtual Task<IEnumerable<T>> GetAllAsync()
         {
-            List<T> items = _database.Set<T>().ToList();
-            return items;
+            return await _database.Set<T>().ToListAsync();
         }
 
-        public virtual Task Update(T item)
+        public async virtual Task UpdateAsync(T item)
         {
-            throw new System.NotImplementedException();
+            _database.Set<T>().Update(item);
+            await _database.SaveChangesAsync();
+        }
+        public virtual void Dispose()
+        {
+            GC.SuppressFinalize(this);
         }
     }
 }

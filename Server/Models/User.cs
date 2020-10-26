@@ -1,11 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Server.Models
 {
     [Table("User")]
-    public class User
+    public class User : TEntity
     {
-        public int UserId { get; set; }
+        [JsonPropertyName("UserId")]
+        [Column("UserId")]
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Password { get; set; }

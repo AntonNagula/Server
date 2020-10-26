@@ -1,12 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using Server.Models;
+using System.Threading.Tasks;
 
 namespace Server.DatabaseAbstraction.Repositories
 {
     public interface IWriteRepository<T> : IRepository
-        where T : class
+        where T : TEntity
     {
-        Task Create(T item);
-        Task Update(T item);
-        Task<bool> Delete(int id);
+        Task CreateAsync(T item);
+        Task UpdateAsync(T item);
+        Task<bool> DeleteAsync(int id);
     }
 }

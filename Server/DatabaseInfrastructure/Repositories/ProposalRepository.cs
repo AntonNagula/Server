@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Server.Models;
 
 namespace Server.DatabaseInfrastructure.Repositories
 {
-    public class ProposalRepository
+    public class ProposalRepository : Repository<Proposal>
     {
+        public ProposalRepository(ProjectDbContext projectDbContext): base(projectDbContext)
+        {
+
+        }
     }
 }

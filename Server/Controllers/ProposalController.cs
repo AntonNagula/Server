@@ -14,8 +14,8 @@ namespace Server.Controllers
         List<Proposal> proposals = new List<Proposal>();
         public ProposalController()
         {
-            proposals.Add(new Proposal { ProposalId=1, Name = "jjjj", StatusId = 1, BankAccount="kkkk", Amount=4000 });
-            proposals.Add(new Proposal { ProposalId = 1, Name = "jjjj", StatusId = 1, BankAccount = "kkkk", Amount = 4000 });
+            proposals.Add(new Proposal { Id=1, Name = "jjjj", StatusId = 1, BankAccount="kkkk", Amount=4000 });
+            proposals.Add(new Proposal { Id = 1, Name = "jjjj", StatusId = 1, BankAccount = "kkkk", Amount = 4000 });
         }
         [HttpGet]
         public IEnumerable<Proposal> GetProposals()
@@ -25,7 +25,7 @@ namespace Server.Controllers
         [HttpGet("{id}")]
         public Proposal GetProposal([FromRoute] int id)
         {
-            Proposal proposal = proposals.FirstOrDefault(x => x.ProposalId == id);
+            Proposal proposal = proposals.FirstOrDefault(x => x.Id == id);
             return proposal;
         }
         [HttpPost]
@@ -37,7 +37,7 @@ namespace Server.Controllers
         [HttpDelete("{id}")]
         public IEnumerable<Proposal> DeleteProposal([FromRoute]int id)
         {            
-            Proposal proposal = proposals.FirstOrDefault(x => x.ProposalId==id);
+            Proposal proposal = proposals.FirstOrDefault(x => x.Id==id);
             proposals.Remove(proposal);
             return proposals;
 
