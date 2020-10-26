@@ -1,11 +1,18 @@
-﻿namespace Server.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
+namespace Server.Models
 {
-    public class Budget
+    [Table("Budget")]
+    public class Budget : TEntity
     {
-        public string id { get; set; }
-        public string name { get; set; }
-        public string amount { get; set; }
-        public string remainingAmount { get; set; }
-        public string budgetTemplateId { get; set; }
+        [JsonPropertyName("Id")]
+        [Column("BudgetId")]
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public double? Amount { get; set; }
+        public double? RemainingAmount { get; set; }
+        public int? BudgetTemplateId { get; set; }
+        public BudgetTemplate BudgetTemplate { get; set; }
     }
 }

@@ -3,13 +3,12 @@ using System.Text.Json.Serialization;
 
 namespace Server.Models
 {
-    [Table("BudgetTemplate")]
-    public class BudgetTemplate : TEntity
+    [Table("Role")]
+    public class Role : TEntity
     {
-        [JsonPropertyName("BudgetTemplateId")]
-        [Column("BudgetTemplateId")]
+        [JsonPropertyName("RoleId")]
+        [Column("RoleId")]
         public int Id { get; set; }
         public string Name { get; set; }
-        public int? Amount { get; set; }
     }
 }

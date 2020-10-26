@@ -1,15 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Server.DatabaseAbstraction;
+using Server.DatabaseAbstraction.Repositories;
+using Server.DatabaseInfrastructure;
+using Server.DatabaseInfrastructure.Repositories;
+using Server.Managers;
+using Server.Models;
+using Server.Services;
 
 namespace Server
 {
@@ -27,6 +29,8 @@ namespace Server
         {
             services.AddCors();
 
+            services.AddJWTAuthService(Configuration);
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -34,18 +38,21 @@ namespace Server
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
 
-            //services.AddTransient<IService, Service>();
+            services.AddSingleton<JWTManager>();
 
-            //services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddDbContext<ProjectDbContext>(options =>
+               options.UseSqlServer(
+                   Configuration.GetConnectionString("DefaultConnection")
+                   )
+               );
 
-            
+            services.AddTransient<IGenericRepository<Proposal>,Repository<Proposal>>();
+            services.AddTransient<IGenericRepository<Payment>, Repository<Payment>>();
+            services.AddTransient<IGenericRepository<Budget>, Repository<Budget>>();
+            services.AddTransient<IGenericRepository<BudgetTemplate>, Repository<BudgetTemplate>>();
+            services.AddTransient<IGenericRepository<User>, Repository<User>>();
 
-            //services.AddDbContext<ProjectDbContext>(options =>
-            //   options.UseSqlServer(
-            //       Configuration.GetConnectionString("DefaultConnection")
-            //       )
-            //   );
-
+            services.AddTransient<IUnitOfWork,UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,8 +63,8 @@ namespace Server
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseDefaultFiles(); // <-- Это
-            app.UseStaticFiles(); // <-- Вот это
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
@@ -71,6 +78,7 @@ namespace Server
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

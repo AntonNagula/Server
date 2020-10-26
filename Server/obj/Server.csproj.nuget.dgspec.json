@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\универ\\4 курс\\Курсач\\Server\\Server\\Server.csproj": {}
+    "C:\\Users\\Banderos\\Desktop\\Server\\Server\\Server.csproj": {}
   },
   "projects": {
-    "G:\\универ\\4 курс\\Курсач\\Server\\Server\\Server.csproj": {
+    "C:\\Users\\Banderos\\Desktop\\Server\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\универ\\4 курс\\Курсач\\Server\\Server\\Server.csproj",
+        "projectUniqueName": "C:\\Users\\Banderos\\Desktop\\Server\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "G:\\универ\\4 курс\\Курсач\\Server\\Server\\Server.csproj",
+        "projectPath": "C:\\Users\\Banderos\\Desktop\\Server\\Server\\Server.csproj",
         "packagesPath": "C:\\Users\\Banderos\\.nuget\\packages\\",
-        "outputPath": "G:\\универ\\4 курс\\Курсач\\Server\\Server\\obj\\",
+        "outputPath": "C:\\Users\\Banderos\\Desktop\\Server\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Banderos\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -38,6 +38,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.9, )"
@@ -73,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

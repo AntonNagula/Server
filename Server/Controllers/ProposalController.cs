@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
 
 namespace Server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProposalController : ControllerBase
@@ -16,8 +14,8 @@ namespace Server.Controllers
         List<Proposal> proposals = new List<Proposal>();
         public ProposalController()
         {
-            proposals.Add(new Proposal { id="1", name = "jjjj", status = "1", userName="vtv", bankAccount="kkkk", amount="jknk" });
-            proposals.Add(new Proposal { id="2", name = "pokju", status = "2", userName="tgv" });
+            proposals.Add(new Proposal { Id=1, Name = "jjjj", StatusId = 1, BankAccount="kkkk", Amount=4000 });
+            proposals.Add(new Proposal { Id = 1, Name = "jjjj", StatusId = 1, BankAccount = "kkkk", Amount = 4000 });
         }
         [HttpGet]
         public IEnumerable<Proposal> GetProposals()
@@ -27,7 +25,7 @@ namespace Server.Controllers
         [HttpGet("{id}")]
         public Proposal GetProposal([FromRoute] int id)
         {
-            Proposal proposal = proposals.FirstOrDefault(x => x.id == id.ToString());
+            Proposal proposal = proposals.FirstOrDefault(x => x.Id == id);
             return proposal;
         }
         [HttpPost]
@@ -39,7 +37,7 @@ namespace Server.Controllers
         [HttpDelete("{id}")]
         public IEnumerable<Proposal> DeleteProposal([FromRoute]int id)
         {            
-            Proposal proposal = proposals.FirstOrDefault(x => x.id==id.ToString());
+            Proposal proposal = proposals.FirstOrDefault(x => x.Id==id);
             proposals.Remove(proposal);
             return proposals;
 
