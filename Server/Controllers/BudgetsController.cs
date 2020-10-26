@@ -31,10 +31,16 @@ namespace Server.Controllers
             return Ok();
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetPayments([FromRoute] int id)
+        public async Task<IActionResult> GetBudgets([FromRoute] int id)
         {
             IEnumerable<Budget> budgets = await _budgetService.GetAllAsync();
             return Ok(budgets);
+        }
+        [HttpPut]
+        public async Task<IActionResult> PutBudget([FromBody] Budget budget)
+        {
+            await _budgetService.UpdateAsync(budget);
+            return Ok();
         }
     }
 }

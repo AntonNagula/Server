@@ -10,7 +10,7 @@ namespace Server.DatabaseAbstraction
     {
         IGenericRepository<Proposal> Proposals { get; }
         IGenericRepository<User> Users { get; }
-        IGenericRepository<Payment> Payments { get; }
+        IPaymentRepository Payments { get; }
         IGenericRepository<Budget> Budgets { get; }
         IGenericRepository<BudgetTemplate> BudgetTemplates { get; }
 

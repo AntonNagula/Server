@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.BusinessAbstraction;
 using Server.DatabaseAbstraction;
 using Server.DatabaseInfrastructure;
 using Server.Managers;
@@ -15,50 +16,43 @@ namespace Server.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        List<User> users = new List<User>();
-        List<Role> roles = new List<Role>();
         private JWTManager _jwtManager;
-        private IUnitOfWork _database;
-        public UserController(JWTManager jwtManager, IUnitOfWork database)
+        private IUserService _userService;
+        public UserController(JWTManager jwtManager, IUserService userService)
         {
             _jwtManager = jwtManager;
-            _database = database;
-            users.Add(new User { Id = 1, Name = "jjjj", RoleId = 1 });
-            roles.Add(new Role { Id = 1, Name = "plokij" });
+            _userService = userService;
         }
         
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            IEnumerable<User> users = await _database.Users.GetAllAsync();
+            IEnumerable<User> users = await _userService.GetAllAsync();
             return Ok(users);
         }
-        [HttpGet("/api/Roles")]
-        public async Task<IActionResult> GetRoles()
-        {
-            return Ok(roles);
-        }
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser([FromRoute] int id)
         {
-            User user = users.FirstOrDefault(x => x.Id == id);
+            User user = await _userService.GetAsync(id);
             return Ok(user);
         }
         [HttpPost]
         public async Task<IActionResult> PostUser([FromBody] User user)
         {
-            await _database.Users.CreateAsync(user);
+            await _userService.CreateAsync(user);
             return Ok();
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser([FromBody] User user)
         {
-            users.Add(user);
+            await _userService.UpdateAsync(user);
             return Ok();
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
+            await _userService.DeleteAsync(id);
             return Ok();
         }
         [HttpPost("/token")]

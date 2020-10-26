@@ -54,6 +54,7 @@ namespace Server.BusinessManagers
             {
                 Budget budget = new Budget();
                 budget.Amount = budgetTemplate.Amount;
+                budget.RemainingAmount = budgetTemplate.Amount;
                 budget.Name = budgetTemplate.Name;
                 budget.BudgetTemplateId = budgetTemplate.Id;
                 yield return budget;

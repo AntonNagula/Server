@@ -15,6 +15,14 @@ namespace Server.Models
         public string Email { get; set; }
         public int? RoleId { get; set; }
         public Role Role { get; set; }
+        public void Update(User user)
+        {
+            Name = user.Name;
+            Surname = user.Surname;
+            Password = user.Password;
+            Email = user.Email;
+            RoleId = user.RoleId;
+        }
     }
 
     public enum Roles : int

@@ -15,5 +15,12 @@ namespace Server.Models
         public Proposal Proposal { get; set; }
         public int? BudgetId { get; set; }
         public Budget Budget { get; set; }
+        public void Update(Payment payment)
+        {
+            Name = payment.Name;
+            Amount = payment.Amount;
+            ProposalId = payment.ProposalId;
+            BudgetId = payment.BudgetId;
+        }
     }
 }

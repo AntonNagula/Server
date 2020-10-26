@@ -3,31 +3,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Server.BusinessAbstraction;
 using Server.Models;
 
 namespace Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PaymentController : ControllerBase
     {
-        List<Payment> payments = new List<Payment>();
-        public PaymentController()
+        private IPaymentService _paymentService;
+        public PaymentController(IPaymentService paymentService)
         {
-            payments.Add(new Payment { Id = 1, Name = "jjjj", Amount = 2000, ProposalId = 1 });
-            payments.Add(new Payment { Id = 2, Name = "jjjj", Amount = 2000, ProposalId = 2 });
+            _paymentService = paymentService;
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetPayments([FromRoute] int id)
+        public async Task<IActionResult> GetPaymentsByProposal([FromRoute] int id)
         {
-            IEnumerable<Payment> payments2 = payments.Where(x => x.ProposalId == id).ToList();
-            return Ok(payments2);
+            IEnumerable<Payment> payments = await _paymentService.GetPaymentsByProposalAsync(id);
+            return Ok(payments);
         }
         [HttpPost]
         public async Task<IActionResult> PostPayment([FromBody] Payment payment)
         {
-            payments.Add(payment);
+            await _paymentService.CreateAsync(payment);
             return Ok();
         }
     }
