@@ -15,7 +15,7 @@ namespace Server.Controllers
         List<BudgetTemplate> budgetTemplates = new List<BudgetTemplate>();
         public BudgetTemplatesController()
         {
-            budgetTemplates.Add(new BudgetTemplate { BudgetTemplateId = 1, Name = "jjjj", Amount = 2000 });
+            budgetTemplates.Add(new BudgetTemplate { Id = 1, Name = "jjjj", Amount = 2000 });
         }
         [HttpGet]
         public async Task<IActionResult> GetBudgetTemplates()
@@ -25,7 +25,7 @@ namespace Server.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBudgetTemplate([FromRoute]int id)
         {
-            BudgetTemplate bt = budgetTemplates.FirstOrDefault(x => x.BudgetTemplateId == id);
+            BudgetTemplate bt = budgetTemplates.FirstOrDefault(x => x.Id == id);
             return Ok(bt);
         }
         [HttpPost]

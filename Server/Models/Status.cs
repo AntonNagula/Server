@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Server.Models
 {
-    public class Status
+    [Table("Status")]
+    public class Status : TEntity
     {
-        public int StatusId { get; set; }
+        [JsonPropertyName("StatusId")]
+        [Column("StatusId")]
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

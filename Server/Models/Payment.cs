@@ -1,8 +1,14 @@
-﻿namespace Server.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
+namespace Server.Models
 {
-    public class Payment
+    [Table("Payment")]
+    public class Payment : TEntity
     {
-        public int PaymentId { get; set; }
+        [JsonPropertyName("PaymentId")]
+        [Column("PaymentId")]
+        public int Id { get; set; }
         public string Name { get; set; }
         public double? Amount { get; set; }
         public int? ProposalId { get; set; }

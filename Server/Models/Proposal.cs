@@ -1,8 +1,15 @@
-﻿namespace Server.Models
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
+namespace Server.Models
 {
-    public class Proposal
+    [Table("Proposal")]
+    public class Proposal : TEntity
     {
-        public int ProposalId { get; set; }
+        [JsonPropertyName("ProposalId")]
+        [Column("ProposalId")]
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Purpose { get; set; }
         public double? Amount { get; set; }
