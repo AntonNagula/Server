@@ -10,6 +10,7 @@ namespace Server.BusinessAbstraction
     {
         Task<IEnumerable<User>> GetAllAsync();
         Task<User> GetAsync(int id);
+        Task<User> GetUserByNamePasswordAsync(string name, string password);
         Task CreateAsync(User item);
         Task UpdateAsync(User item);
         Task DeleteAsync(int id);

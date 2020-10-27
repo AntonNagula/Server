@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Server.BusinessAbstraction;
-using Server.DatabaseAbstraction;
-using Server.DatabaseInfrastructure;
 using Server.Managers;
 using Server.Models;
 
@@ -59,8 +57,13 @@ namespace Server.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] AuthData authData)
         {
-            var tokenString = _jwtManager.GenerateToken("d","d");
-            return Ok(new { Token = tokenString });
+            User user = await _userService.GetUserByNamePasswordAsync(authData.Login, authData.Password);
+            if(user == null)
+            {
+                return Unauthorized();
+            }
+            var tokenString = _jwtManager.GenerateToken(user.Role.Name, user.Email, user.Password );
+            return Ok(new { Token = tokenString, Role = user.Role.Name });
         }
     }
 }

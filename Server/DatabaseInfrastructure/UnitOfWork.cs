@@ -12,32 +12,32 @@ namespace Server.DatabaseInfrastructure
     {      
         private ProjectDbContext _database;
 
-        private Repository<Proposal> _proposals;
+        private ProposalRepository _proposals;
         private PaymentRepository _payments;
         private Repository<Budget> _budgets;
         private Repository<BudgetTemplate> _budgettemplates;
-        private Repository<User> _users;
+        private UserRepository _users;
 
         public UnitOfWork(ProjectDbContext db)
         {
             _database = db;
         }
-        public IGenericRepository<Proposal> Proposals
+        public IProposalRepository Proposals
         {
             get
             {
                 if (_proposals == null)
-                    _proposals = new Repository<Proposal>(_database);
+                    _proposals = new ProposalRepository(_database);
                 return _proposals;
             }
         }
 
-        public IGenericRepository<User> Users
+        public IUserRepository Users
         {
             get
             {
                 if (_users == null)
-                    _users = new Repository<User>(_database);
+                    _users = new UserRepository(_database);
                 return _users;
             }
         }

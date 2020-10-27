@@ -48,11 +48,11 @@ namespace Server
                    )
                );
 
-            services.AddTransient<IGenericRepository<Proposal>,Repository<Proposal>>();
+            services.AddTransient<IProposalRepository, ProposalRepository>();
             services.AddTransient<IPaymentRepository, PaymentRepository>();
             services.AddTransient<IGenericRepository<Budget>, Repository<Budget>>();
             services.AddTransient<IGenericRepository<BudgetTemplate>, Repository<BudgetTemplate>>();
-            services.AddTransient<IGenericRepository<User>, Repository<User>>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddTransient<IUnitOfWork,UnitOfWork>();
 

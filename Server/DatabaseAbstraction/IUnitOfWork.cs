@@ -8,8 +8,8 @@ namespace Server.DatabaseAbstraction
 {
     public interface IUnitOfWork : IDisposable
     {
-        IGenericRepository<Proposal> Proposals { get; }
-        IGenericRepository<User> Users { get; }
+        IProposalRepository Proposals { get; }
+        IUserRepository Users { get; }
         IPaymentRepository Payments { get; }
         IGenericRepository<Budget> Budgets { get; }
         IGenericRepository<BudgetTemplate> BudgetTemplates { get; }

@@ -31,7 +31,12 @@ namespace Server.BusinessManagers
             IEnumerable<Proposal> proposals = await _database.Proposals.GetAllAsync();
             return proposals.ToList();
         }
-
+        public async Task<IEnumerable<Proposal>> GetProposalsByUserNamePasswordAsync(string name, string password)
+        {
+            User user = await _database.Users.GetUserByNamePasswordAsync(name, password);
+            IEnumerable<Proposal> proposals = await _database.Proposals.GetProposalsByUserIdAsync(user.Id);
+            return proposals.ToList();
+        }
         public async Task<Proposal> GetAsync(int id)
         {
             Proposal proposal = await _database.Proposals.GetAsync(id);

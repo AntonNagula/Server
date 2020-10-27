@@ -40,6 +40,12 @@ namespace Server.BusinessManagers
             return user;
         }
 
+        public async Task<User> GetUserByNamePasswordAsync(string name, string password)
+        {
+            User user = await _database.Users.GetUserByNamePasswordAsync(name, password);
+            return user;
+        }
+
         public async Task UpdateAsync(User item)
         {
             User user = await _database.Users.GetAsync(item.Id);

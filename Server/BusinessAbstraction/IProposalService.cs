@@ -7,6 +7,7 @@ namespace Server.BusinessAbstraction
     public interface IProposalService
     {
         Task<IEnumerable<Proposal>> GetAllAsync();
+        Task<IEnumerable<Proposal>> GetProposalsByUserNamePasswordAsync(string name, string password);
         Task<Proposal> GetAsync(int id);
         Task CreateAsync(Proposal item);
         Task UpdateAsync(Proposal item);
