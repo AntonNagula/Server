@@ -18,7 +18,7 @@ namespace Server.BusinessManagers
         public async Task CreateAsync(Payment item)
         {
             Budget budget = await _database.Budgets.GetAsync(item.BudgetId.Value);
-            budget.RemainingAmount = budget.Amount - item.Amount;
+            budget.RemainingAmount -= item.Amount;
             await _database.Budgets.UpdateAsync(budget);
             await _database.Payments.CreateAsync(item);
         }

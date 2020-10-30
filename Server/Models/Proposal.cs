@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using Server.Models.DTO;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -21,6 +21,16 @@ namespace Server.Models
 
         public void Update(Proposal proposal)
         {
+            Name = proposal.Name;
+            Purpose = proposal.Purpose;
+            Amount = proposal.Amount;
+            BankAccount = proposal.BankAccount;
+            StatusId = proposal.StatusId;
+            UserId = proposal.UserId;
+        }
+        public void UpdateByDTO(ProposalDTO proposal)
+        {
+            Id = proposal.Id;
             Name = proposal.Name;
             Purpose = proposal.Purpose;
             Amount = proposal.Amount;

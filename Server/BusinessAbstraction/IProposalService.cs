@@ -9,7 +9,7 @@ namespace Server.BusinessAbstraction
         Task<IEnumerable<Proposal>> GetAllAsync();
         Task<IEnumerable<Proposal>> GetProposalsByUserNamePasswordAsync(string name, string password);
         Task<Proposal> GetAsync(int id);
-        Task CreateAsync(Proposal item);
+        Task CreateAsync(Proposal item, string username, string password);
         Task UpdateAsync(Proposal item);
         Task DeleteAsync(int id);
     }

@@ -6,7 +6,7 @@ namespace Server.Models
     [Table("Budget")]
     public class Budget : TEntity
     {
-        [JsonPropertyName("id")]
+        [JsonPropertyName("budgetId")]
         [Column("BudgetId")]
         public int Id { get; set; }
         public string Name { get; set; }

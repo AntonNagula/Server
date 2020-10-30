@@ -19,5 +19,13 @@ namespace Server.DatabaseInfrastructure.Repositories
             List<Proposal> proposals = await _database.Set<Proposal>().Include(x => x.Status).Where(x => x.UserId == id).ToListAsync();
             return proposals;
         }
+        public async override Task<IEnumerable<Proposal>> GetAllAsync()
+        {
+            return await _database.Set<Proposal>().Include(x => x.User).Include(x => x.Status).Where(x => x.StatusId != 1).ToListAsync();
+        }
+        public async override Task<Proposal> GetAsync(int id)
+        {
+            return await _database.Set<Proposal>().Include(x => x.Status).Include(x => x.User).FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Server.BusinessAbstraction;
 using Server.Managers;
 using Server.Models;
+using Server.Models.DTO;
 
 namespace Server.Controllers
 {
@@ -44,9 +45,25 @@ namespace Server.Controllers
             return Ok(proposals);
         }
         [HttpPost]
-        public async Task<IActionResult> PostProposal([FromBody] Proposal proposal)
+        public async Task<IActionResult> PostProposal([FromBody] ProposalDTO proposal)
         {
-            await _proposalService.CreateAsync(proposal);
+            Proposal newProposal = new Proposal();
+            newProposal.UpdateByDTO(proposal);
+
+            JWTManager jwtManager = new JWTManager();
+            string jwt = jwtManager.GetTokenFromHeader(Request.Headers["Authorization"]);
+            string username = jwtManager.GetUserNameFromJWT(jwt);
+            string password = jwtManager.GetPasswordFromJWT(jwt);
+
+            await _proposalService.CreateAsync(newProposal, username, password);
+            return Ok();
+        }
+        [HttpPut]
+        public async Task<IActionResult> PutProposal([FromBody] ProposalDTO proposal)
+        {
+            Proposal newProposal = new Proposal();
+            newProposal.UpdateByDTO(proposal);
+            await _proposalService.UpdateAsync(newProposal);
             return Ok();
         }
         [HttpDelete("{id}")]
