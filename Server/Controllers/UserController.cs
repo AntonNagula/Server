@@ -65,5 +65,14 @@ namespace Server.Controllers
             var tokenString = _jwtManager.GenerateToken(user.Role.Name, user.Email, user.Password );
             return Ok(new { Token = tokenString, Role = user.Role.Name });
         }
+        [HttpGet("Roles")]
+        public IActionResult GetRoles()
+        {
+            List<Role> roles = new List<Role>();
+            roles.Add(new Role { Id = (int)Roles.Admin, Name = Roles.Admin.ToString() });
+            roles.Add(new Role { Id = (int)Roles.Client, Name = Roles.Client.ToString() });
+            roles.Add(new Role { Id = (int)Roles.Submitter, Name = Roles.Submitter.ToString() });
+            return Ok(roles);
+        }
     }
 }

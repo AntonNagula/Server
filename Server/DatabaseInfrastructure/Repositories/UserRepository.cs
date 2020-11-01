@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Server.DatabaseAbstraction.Repositories;
 using Server.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Server.DatabaseInfrastructure.Repositories
@@ -16,6 +17,10 @@ namespace Server.DatabaseInfrastructure.Repositories
         {
             User user = await _database.Set<User>().Include(x => x.Role).FirstOrDefaultAsync(x => x.Email == name && x.Password == password);
             return user;
+        }
+        public async override Task<IEnumerable<User>> GetAllAsync()
+        {
+            return await _database.Set<User>().Include(x=>x.Role).ToListAsync();
         }
     }
 }
