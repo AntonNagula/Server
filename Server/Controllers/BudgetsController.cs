@@ -21,7 +21,7 @@ namespace Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBudgets()
         {
-            IEnumerable<Budget> budgets = await _budgetService.GetAllAsync();
+            IEnumerable<Budget> budgets = await _budgetService.GetEnabledBudgets();
             return Ok(budgets);
         }
         [HttpPost("AddCollection")]

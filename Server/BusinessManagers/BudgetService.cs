@@ -35,7 +35,12 @@ namespace Server.BusinessManagers
             IEnumerable<Budget> budgets = await _database.Budgets.GetAllAsync();
             return budgets.ToList();
         }
-
+        public async Task<IEnumerable<Budget>> GetEnabledBudgets()
+        {
+            IEnumerable<Budget> budgets = await _database.Budgets.GetEnabledBudgets();
+            List<Budget> updatedBudgets = budgets.ToList();
+            return updatedBudgets;
+        }
         public async Task<Budget> GetAsync(int id)
         {
             Budget budget = await _database.Budgets.GetAsync(id);
@@ -50,13 +55,15 @@ namespace Server.BusinessManagers
         }
         private IEnumerable<Budget> InitializeBudgets(IEnumerable<BudgetTemplate> budgetTemplates)
         {
-            foreach(BudgetTemplate budgetTemplate in budgetTemplates)
+            List<BudgetTemplate> availableBTs = budgetTemplates.Where(x => x.Enabled == true).ToList();
+            foreach(BudgetTemplate budgetTemplate in availableBTs)
             {
                 Budget budget = new Budget();
                 budget.Amount = budgetTemplate.Amount;
                 budget.RemainingAmount = budgetTemplate.Amount;
                 budget.Name = budgetTemplate.Name;
                 budget.BudgetTemplateId = budgetTemplate.Id;
+                budget.Enabled = true;
                 yield return budget;
             }
         }

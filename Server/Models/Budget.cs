@@ -12,6 +12,7 @@ namespace Server.Models
         public string Name { get; set; }
         public double? Amount { get; set; }
         public double? RemainingAmount { get; set; }
+        public bool? Enabled { get; set; }
         public int? BudgetTemplateId { get; set; }
         public BudgetTemplate BudgetTemplate { get; set; }
         public void Update(Budget budget)
@@ -20,6 +21,7 @@ namespace Server.Models
             Amount = budget.Amount;
             RemainingAmount = budget.RemainingAmount;
             BudgetTemplateId = budget.BudgetTemplateId;
+            Enabled = budget.Enabled;
         }
     }
 }

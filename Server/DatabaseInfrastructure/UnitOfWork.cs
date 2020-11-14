@@ -14,7 +14,7 @@ namespace Server.DatabaseInfrastructure
 
         private ProposalRepository _proposals;
         private PaymentRepository _payments;
-        private Repository<Budget> _budgets;
+        private BudgetRepository _budgets;
         private Repository<BudgetTemplate> _budgettemplates;
         private UserRepository _users;
 
@@ -61,12 +61,12 @@ namespace Server.DatabaseInfrastructure
             }
         }
 
-        public IGenericRepository<Budget> Budgets
+        public IBudgetRepository Budgets
         {
             get
             {
                 if (_budgets == null)
-                    _budgets = new Repository<Budget>(_database);
+                    _budgets = new BudgetRepository(_database);
                 return _budgets;
             }
         }

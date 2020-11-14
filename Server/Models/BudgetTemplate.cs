@@ -11,10 +11,12 @@ namespace Server.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public double? Amount { get; set; }
+        public bool? Enabled { get; set; }
         public void Update(BudgetTemplate budgetTemplate)
         {
             Name = budgetTemplate.Name;
             Amount = budgetTemplate.Amount;
+            Enabled = budgetTemplate.Enabled;
         }
     }
 }

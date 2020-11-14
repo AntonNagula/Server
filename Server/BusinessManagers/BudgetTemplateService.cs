@@ -31,7 +31,7 @@ namespace Server.BusinessManagers
         public async Task<IEnumerable<BudgetTemplate>> GetAllAsync()
         {
             IEnumerable<BudgetTemplate> budgettemplates = await _database.BudgetTemplates.GetAllAsync();
-            return budgettemplates.ToList();
+            return budgettemplates.Where(x => x.Enabled == true).ToList();
         }
 
         public async Task<BudgetTemplate> GetAsync(int id)

@@ -9,6 +9,7 @@ namespace Server.BusinessAbstraction
     public interface IBudgetService
     {
         Task<IEnumerable<Budget>> GetAllAsync();
+        Task<IEnumerable<Budget>> GetEnabledBudgets();
         Task<Budget> GetAsync(int id);
         Task CreateRangeAsync();
         Task CreateAsync(Budget item);

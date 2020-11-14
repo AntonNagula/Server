@@ -11,7 +11,7 @@ namespace Server.DatabaseAbstraction
         IProposalRepository Proposals { get; }
         IUserRepository Users { get; }
         IPaymentRepository Payments { get; }
-        IGenericRepository<Budget> Budgets { get; }
+        IBudgetRepository Budgets { get; }
         IGenericRepository<BudgetTemplate> BudgetTemplates { get; }
 
         bool HasChanges();

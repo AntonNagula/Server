@@ -50,7 +50,7 @@ namespace Server
 
             services.AddTransient<IProposalRepository, ProposalRepository>();
             services.AddTransient<IPaymentRepository, PaymentRepository>();
-            services.AddTransient<IGenericRepository<Budget>, Repository<Budget>>();
+            services.AddTransient<IBudgetRepository, BudgetRepository>();
             services.AddTransient<IGenericRepository<BudgetTemplate>, Repository<BudgetTemplate>>();
             services.AddTransient<IUserRepository, UserRepository>();
 

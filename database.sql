@@ -16,7 +16,8 @@ INSERT INTO [Status] ([Name])
 VALUES
 ('Draft'),
 ('Sent'),
-('Approved')
+('Approved'),
+('Denied')
 GO
 
 CREATE TABLE [Role]
@@ -39,6 +40,7 @@ CREATE TABLE BudgetTemplate
   [BudgetTemplateId]  [int] IDENTITY (1, 1),
   [Name] varchar(30) NOT NULL,
   [Amount] [float] NULL,
+  [Enabled] [bit] NULL,
   CONSTRAINT PK_BudgetTemplate_Id PRIMARY KEY ([BudgetTemplateId]),
 );
 GO 
@@ -50,6 +52,7 @@ CREATE TABLE Budget
   [Amount] [float] NULL,
   [RemainingAmount] [float] NULL,
   [BudgetTemplateId] [int] NULL,
+  [Enabled] [bit] NULL,
   CONSTRAINT PK_Budget_Id PRIMARY KEY ([BudgetId]),
   CONSTRAINT FK_Budget_To_BudgetTemplate FOREIGN KEY([BudgetTemplateId]) REFERENCES BudgetTemplate ([BudgetTemplateId])
 );
