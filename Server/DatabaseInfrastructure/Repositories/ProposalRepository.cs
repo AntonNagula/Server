@@ -21,11 +21,11 @@ namespace Server.DatabaseInfrastructure.Repositories
         }
         public async override Task<IEnumerable<Proposal>> GetAllAsync()
         {
-            return await _database.Set<Proposal>().Include(x => x.User).Include(x => x.Status).Where(x => x.StatusId != 1).ToListAsync();
+            return await _database.Set<Proposal>().Include(x => x.User).Include(x => x.Status).Include(x => x.Purpose).Where(x => x.StatusId != 1).ToListAsync();
         }
         public async override Task<Proposal> GetAsync(int id)
         {
-            return await _database.Set<Proposal>().Include(x => x.Status).Include(x => x.User).FirstOrDefaultAsync(x => x.Id == id);
+            return await _database.Set<Proposal>().Include(x => x.Status).Include(x => x.User).Include(x => x.Purpose).FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

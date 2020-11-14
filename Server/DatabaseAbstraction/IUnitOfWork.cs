@@ -13,6 +13,7 @@ namespace Server.DatabaseAbstraction
         IPaymentRepository Payments { get; }
         IBudgetRepository Budgets { get; }
         IGenericRepository<BudgetTemplate> BudgetTemplates { get; }
+        IGenericRepository<Purpose> Purposes { get; }
 
         bool HasChanges();
         Task CommitAsync(CancellationToken cancellationToken = default);

@@ -16,12 +16,24 @@ namespace Server.DatabaseInfrastructure
         private PaymentRepository _payments;
         private BudgetRepository _budgets;
         private Repository<BudgetTemplate> _budgettemplates;
+        private Repository<Purpose> _purposes;
+
         private UserRepository _users;
 
         public UnitOfWork(ProjectDbContext db)
         {
             _database = db;
         }
+        public IGenericRepository<Purpose> Purposes 
+        {
+            get
+            {
+                if (_purposes == null)
+                    _purposes = new Repository<Purpose>(_database);
+                return _purposes;
+            }
+        }
+
         public IProposalRepository Proposals
         {
             get

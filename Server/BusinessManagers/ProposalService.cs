@@ -31,6 +31,12 @@ namespace Server.BusinessManagers
         public async Task<IEnumerable<Proposal>> GetAllAsync()
         {
             IEnumerable<Proposal> proposals = await _database.Proposals.GetAllAsync();
+            var Proposals = proposals.ToList();
+            for(int i=0;i< Proposals.Count;i++)
+            {
+                if (Proposals[i].Purpose != null)
+                    Proposals[i].purpose = Proposals[i].Purpose.Name;               
+            }
             return proposals.ToList();
         }
         public async Task<IEnumerable<Proposal>> GetProposalsByUserNamePasswordAsync(string name, string password)
@@ -42,6 +48,8 @@ namespace Server.BusinessManagers
         public async Task<Proposal> GetAsync(int id)
         {
             Proposal proposal = await _database.Proposals.GetAsync(id);
+            if (proposal.Purpose != null)
+                proposal.purpose = proposal.Purpose.Name;
             return proposal;
         }
 

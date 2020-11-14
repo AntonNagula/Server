@@ -71,6 +71,14 @@ CREATE TABLE [User]
 );
 GO 
 
+CREATE TABLE [Purpose]
+(
+  [PurposeId]  [int] IDENTITY (1, 1),
+  [Name] varchar(30) NOT NULL
+  CONSTRAINT PK_Purpose_Id PRIMARY KEY ([PurposeId]),
+);
+GO
+
 CREATE TABLE [Proposal]
 (
   [ProposalId] [int] IDENTITY (1, 1),
@@ -80,9 +88,11 @@ CREATE TABLE [Proposal]
   [BankAccount] varchar(30) NULL,
   [StatusId] [int] NULL,
   [UserId] [int] NULL,
+  [PurposeId] [int] NULL,
   CONSTRAINT PK_Proposal_Id PRIMARY KEY ([ProposalId]),
   CONSTRAINT FK_Proposal_To_Status FOREIGN KEY([StatusId]) REFERENCES [Status] ([StatusId]),
-  CONSTRAINT FK_Proposal_To_User FOREIGN KEY([UserId]) REFERENCES [User] ([UserId])
+  CONSTRAINT FK_Proposal_To_User FOREIGN KEY([UserId]) REFERENCES [User] ([UserId]),
+  CONSTRAINT FK_Proposal_To_Purpose FOREIGN KEY([PurposeId]) REFERENCES [Purpose] ([PurposeId])
 );
 GO 
 

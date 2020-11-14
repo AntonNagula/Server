@@ -52,6 +52,7 @@ namespace Server
             services.AddTransient<IPaymentRepository, PaymentRepository>();
             services.AddTransient<IBudgetRepository, BudgetRepository>();
             services.AddTransient<IGenericRepository<BudgetTemplate>, Repository<BudgetTemplate>>();
+            services.AddTransient<IGenericRepository<Purpose>, Repository<Purpose>>();
             services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddTransient<IUnitOfWork,UnitOfWork>();
@@ -61,6 +62,7 @@ namespace Server
             services.AddTransient<IBudgetTemplateService, BudgetTemplateService>();
             services.AddTransient<IPaymentService, PaymentService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IPurposeService, PurposeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
