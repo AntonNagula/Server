@@ -21,7 +21,7 @@ namespace Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPurposes()
         {
-            IEnumerable<Purpose> purposes = await _purposeService.GetAllAsync();
+            IEnumerable<Purpose> purposes = await _purposeService.GetEnabledAsync();
             return Ok(purposes);
         }
 

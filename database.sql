@@ -31,8 +31,7 @@ GO
 INSERT INTO [Role] ([Name]) 
 VALUES
 ('Admin'),
-('Client'),
-('Submitter')
+('Client')
 GO
 
 CREATE TABLE BudgetTemplate
@@ -74,7 +73,8 @@ GO
 CREATE TABLE [Purpose]
 (
   [PurposeId]  [int] IDENTITY (1, 1),
-  [Name] varchar(30) NOT NULL
+  [Name] varchar(30) NOT NULL,
+  [Enabled] [bit] NULL,
   CONSTRAINT PK_Purpose_Id PRIMARY KEY ([PurposeId]),
 );
 GO

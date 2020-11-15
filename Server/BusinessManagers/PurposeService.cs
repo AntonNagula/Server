@@ -29,6 +29,12 @@ namespace Server.BusinessManagers
             IEnumerable<Purpose> purposes = await _database.Purposes.GetAllAsync();
             return purposes.ToList();
         }
+        public async Task<IEnumerable<Purpose>> GetEnabledAsync()
+        {
+            IEnumerable<Purpose> purposes = await _database.Purposes.GetAllAsync();
+            List<Purpose> enabledPurposes = purposes.Where(x => x.Enabled == true).ToList();
+            return enabledPurposes;
+        }
         public async Task<Purpose> GetAsync(int id)
         {
             Purpose purpose = await _database.Purposes.GetAsync(id);

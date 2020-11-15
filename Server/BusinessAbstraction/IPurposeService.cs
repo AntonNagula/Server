@@ -9,6 +9,7 @@ namespace Server.BusinessAbstraction
     public interface IPurposeService
     {
         Task<IEnumerable<Purpose>> GetAllAsync();
+        Task<IEnumerable<Purpose>> GetEnabledAsync();
         Task<Purpose> GetAsync(int id);
         Task CreateAsync(Purpose item);
         Task UpdateAsync(Purpose item);

@@ -13,10 +13,12 @@ namespace Server.Models
         [Column("PurposeId")]
         public int Id { get; set; }
         public string Name { get; set; }
+        public bool? Enabled { get; set; }
 
         public void Update(Purpose purpose)
         {
             Name = purpose.Name;
+            Enabled = purpose.Enabled;
         }
     }
 }
