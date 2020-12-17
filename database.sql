@@ -1,5 +1,5 @@
---CREATE DATABASE ProposalManagement;
---GO
+CREATE DATABASE ProposalManagement;
+GO
 
 use [ProposalManagement];
 GO

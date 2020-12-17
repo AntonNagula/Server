@@ -7,7 +7,7 @@ using Server.Models;
 
 namespace Server.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PurposeController : ControllerBase

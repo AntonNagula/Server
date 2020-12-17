@@ -18,8 +18,9 @@ namespace Server.BusinessManagers
 
         public async Task CreateAsync(Proposal item, string username, string password)
         {
-            User user = await _database.Users.GetUserByNamePasswordAsync(username, password);
-            item.UserId = user.Id;            
+            User user = await _database.Users.GetUserByNamePasswordAsync(username, password);            
+            item.UserId = user.Id;
+            item.Name = DateTime.Today.Date.ToString().Substring(0,10);
             await _database.Proposals.CreateAsync(item);
         }
 

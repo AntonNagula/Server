@@ -23,5 +23,10 @@ namespace Server.Models
             BudgetTemplateId = budget.BudgetTemplateId;
             Enabled = budget.Enabled;
         }
+        public static string ToPayment(Budget budget)
+        {
+            return budget.Name + " (Оставшаяся сумма " + budget.RemainingAmount.ToString()+")";
+            
+        }
     }
 }

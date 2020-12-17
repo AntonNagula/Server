@@ -8,7 +8,7 @@ using Server.Models;
 
 namespace Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BudgetsController : ControllerBase
@@ -22,6 +22,17 @@ namespace Server.Controllers
         public async Task<IActionResult> GetBudgets()
         {
             IEnumerable<Budget> budgets = await _budgetService.GetEnabledBudgets();
+            return Ok(budgets);
+        }
+        [HttpGet("payment")]
+        public async Task<IActionResult> GetBudgetsPayment()
+        {
+            IEnumerable<Budget> budgets = await _budgetService.GetEnabledBudgets();
+            List<Budget> budgets1 = budgets.ToList();
+            for(int i=0;i<budgets1.Count;i++)
+            {
+                budgets1[i].Name = Budget.ToPayment(budgets1[i]);
+            }
             return Ok(budgets);
         }
         [HttpPost("AddCollection")]

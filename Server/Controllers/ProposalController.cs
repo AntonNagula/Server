@@ -12,7 +12,7 @@ using Server.Models.DTO;
 
 namespace Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProposalController : ControllerBase
